@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ~/dev/fso/note-app-react/my-app && npm run build --prod && cp -r build ~/dev/fso/simple-web-server/",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push origin master && git push heroku master",
+    "build:ui": "rm -rf build && cd ~/dev/fso/notes/note-app-react/my-app && npm run build --prod && cp -r build ~/dev/fso/notes/simple-web-server",
+    "deploy:github": "git push origin master",
+    "deploy:heroku": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy:github && npm run deploy:heroku",
+    "lint": "eslint .",
     "logs:prod": "heroku logs --tail",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,9 +18,12 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "eslint": "^6.8.0"
   }
 }
